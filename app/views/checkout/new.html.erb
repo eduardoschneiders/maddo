@@ -1,0 +1,29 @@
+<script
+  src="https://www.paypal.com/sdk/js?client-id=Aff_m-kKKHoIJ4qSaBBk2TSGu-98h7uHBB_hYDuONqQw6Rsjl_anjteerC_E20Jmh8R28Q7ujBprdptk&vault=true&currency=BRL">
+</script>
+
+<div id="paypal-button-container"></div>
+
+
+<hr>
+
+<script>
+  paypal.Buttons({
+    createSubscription: function(data, actions) {
+      return actions.subscription.create({
+        'plan_id': 'P-3TX72924JU177261JL32XN2A'
+      });
+    },
+
+    onApprove: function(data, actions) {
+      alert('You have successfully created subscription ' + data.subscriptionID);
+    },
+    onCancel: function (data) {
+      alert('Payment canceled');
+    },
+    onError: function (err) {
+      alert('Erro on payment: ' + err);
+    }
+
+  }).render('#paypal-button-container');
+</script>
