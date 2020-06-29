@@ -16,6 +16,8 @@
     },
 
     onApprove: function(data, actions) {
+      console.log('data: ' + JSON.stringify(data));
+      console.log('actions: ' + JSON.stringify(actions));
       alert('You have successfully created subscription ' + data.subscriptionID);
     },
     onCancel: function (data) {
