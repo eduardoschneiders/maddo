@@ -1,4 +1,4 @@
-class CheckoutController < ApplicationController
+class CheckoutController < AuthenticatedController
   def new
   end
 end

@@ -16,6 +16,7 @@
     },
 
     onApprove: function(data, actions) {
+      updateSubscriptionId(data.subscriptionID);
       console.log('data: ' + JSON.stringify(data));
       console.log('actions: ' + JSON.stringify(actions));
       alert('You have successfully created subscription ' + data.subscriptionID);
@@ -28,4 +29,23 @@
     }
 
   }).render('#paypal-button-container');
+</script>
+
+
+<script>
+  function updateSubscriptionId(id){
+    var formData = new FormData();
+    formData.append('paypal_subscription_id', id);
+
+    fetch(
+      'http://localhost:3000/users/1/update_paypal_subscription_id',
+      {
+        method: 'PUT',
+        body: formData
+      })
+      .then(
+        function(resp){
+          console.log(resp);
+        })
+  }
 </script>
