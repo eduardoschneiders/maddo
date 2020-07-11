@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  paypal_subscription_id: MyString
+  expiration_date: 2020-07-01
+  type: 
+  payment_status: MyString
+  status: MyString
+  user: one
+
+two:
+  paypal_subscription_id: MyString
+  expiration_date: 2020-07-01
+  type: 
+  payment_status: MyString
+  status: MyString
+  user: two

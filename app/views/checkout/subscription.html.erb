@@ -1,5 +1,5 @@
 <script
-  src="https://www.paypal.com/sdk/js?client-id=Aff_m-kKKHoIJ4qSaBBk2TSGu-98h7uHBB_hYDuONqQw6Rsjl_anjteerC_E20Jmh8R28Q7ujBprdptk&vault=true&currency=BRL">
+  src="https://www.paypal.com/sdk/js?client-id=<%= @client_id %>&vault=true">
 </script>
 
 <div id="paypal-button-container"></div>
@@ -11,14 +11,14 @@
   paypal.Buttons({
     createSubscription: function(data, actions) {
       return actions.subscription.create({
-        'plan_id': 'P-3TX72924JU177261JL32XN2A'
+        plan_id: '<%= @plan_id %>',
+        application_context: {
+          shipping_preference: 'NO_SHIPPING'
+        }
       });
     },
-
     onApprove: function(data, actions) {
-      updateSubscriptionId(data.subscriptionID);
-      console.log('data: ' + JSON.stringify(data));
-      console.log('actions: ' + JSON.stringify(actions));
+      create_subscription(data.subscriptionID);
       alert('You have successfully created subscription ' + data.subscriptionID);
     },
     onCancel: function (data) {
@@ -33,14 +33,14 @@
 
 
 <script>
-  function updateSubscriptionId(id){
+  function create_subscription(id){
     var formData = new FormData();
     formData.append('paypal_subscription_id', id);
 
     fetch(
-      'http://localhost:3000/users/1/update_paypal_subscription_id',
+      'http://localhost:3000/users/1/create_subscription',
       {
-        method: 'PUT',
+        method: 'POST',
         body: formData
       })
       .then(

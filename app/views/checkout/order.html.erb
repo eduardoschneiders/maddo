@@ -1,0 +1,59 @@
+<script
+  src="https://www.paypal.com/sdk/js?client-id=<%= @client_id %>&vault=true&currency=BRL">
+</script>
+
+<div id="paypal-button-container"></div>
+
+<hr>
+
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '1.00'
+          }
+        }],
+        application_context: {
+          shipping_preference: 'NO_SHIPPING'
+        }
+      });
+    },
+
+    onApprove: function(data, actions) {
+      create_order(data.orderID);
+      console.log(JSON.stringify(data));
+      return actions.order.capture().then(function(details) {
+        alert('You have successfully created order ' + data.orderID);
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    },
+    onCancel: function (data) {
+      alert('Payment canceled');
+    },
+    onError: function (err) {
+      alert('Erro on payment: ' + err);
+    }
+
+  }).render('#paypal-button-container');
+</script>
+
+
+<script>
+  function create_order(id){
+    var formData = new FormData();
+    formData.append('paypal_order_id', id);
+
+    fetch(
+      'http://localhost:3000/users/1/create_order',
+      {
+        method: 'POST',
+        body: formData
+      })
+      .then(
+        function(resp){
+          console.log(resp);
+        })
+  }
+</script>

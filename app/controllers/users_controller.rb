@@ -1,14 +1,28 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:update_paypal_subscription_id]
+  skip_before_action :verify_authenticity_token, only: [:create_subscription, :create_order]
 
-  def update_paypal_subscription_id
-    user = User.find(params[:id])
+  def create_subscription
+    user.subscriptions.create(
+      paypal_subscription_id: params[:paypal_subscription_id],
+      kind: 'basic_plan',
+      payment_status: 'initialized',
+      status: 'deactivated',
+      expiration_date: nil
+    )
+  end
 
+  def create_order
+    user.orders.create(
+      paypal_order_id: params[:paypal_order_id],
+      items: ['bola de plastico'],
+      payment_status: 'initialized',
+      deliver_status: 'pending'
+    )
+  end
 
-    Rails.logger.info('-----')
-    Rails.logger.info(params.inspect)
-    Rails.logger.info('-----')
-    user.update(
-      paypal_subscription_id: params[:paypal_subscription_id])
+  private
+
+  def user
+    User.find(params[:id])
   end
 end
