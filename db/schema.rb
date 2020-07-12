@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_07_12_042121) do
     t.string "external_id"
     t.string "name"
     t.string "description"
+    t.integer "regular_price"
+    t.integer "week_experience_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

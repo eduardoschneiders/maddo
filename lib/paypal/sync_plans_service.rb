@@ -9,7 +9,7 @@ module Paypal
     def sync
       active_plans.each do |plan_data|
         plan = PaypalPlan.find_or_create_by(external_id: plan_data['id'])
-        plan.update(name: plan_data['name'], description: plan_data['description'])
+        update_plan(plan, plan_data)
         log(plan)
       end
     end
@@ -36,6 +36,35 @@ module Paypal
 
     def filter_active(plans)
       plans.select { |plan| plan['status'] == 'ACTIVE' }
+    end
+
+    def update_plan(plan, plan_data)
+      plan.update(
+        name: plan_data['name'],
+        description: plan_data['description'],
+        regular_price: find_regular_price(plan_data),
+        week_experience_price: find_week_experience_price(plan_data)
+      )
+    end
+
+    def find_regular_price(plan_data)
+      cicle = find_biiling_cicle(plan_data, 'REGULAR')
+      return unless cicle
+
+      cicle['pricing_scheme']['fixed_price']['value'].to_i
+    end
+
+    def find_week_experience_price(plan_data)
+      cicle = find_biiling_cicle(plan_data, 'TRIAL')
+      return unless cicle
+
+      cicle['pricing_scheme']['fixed_price']['value'].to_i
+    end
+
+    def find_biiling_cicle(plan_data, tenure_type)
+      plan_data['billing_cycles'].find do |cicle|
+        cicle['tenure_type'] == tenure_type
+      end
     end
 
     def log(plan)
