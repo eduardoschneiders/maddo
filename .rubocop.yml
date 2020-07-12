@@ -1,0 +1,22 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'tmp'
+    - 'config/puma.rb'
+    - 'config/initializers/devise.rb'
+    - 'bin/*'
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+Bundler/OrderedGems:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
+Layout/LineLength:
+  Max: 120
+
+

@@ -1,0 +1,2 @@
+class PaypalPlan < ApplicationRecord
+end

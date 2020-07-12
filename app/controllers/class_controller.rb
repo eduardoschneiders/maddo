@@ -1,4 +1,3 @@
 class ClassController < AuthenticatedController
-  def index
-  end
+  def index; end
 end
