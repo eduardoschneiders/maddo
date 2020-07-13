@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create_subscription, :create_order]
+  skip_before_action :verify_authenticity_token, only: [:update_subscription, :create_order]
 
-  def create_subscription
-    user.subscriptions.create(
-      paypal_subscription_id: params[:paypal_subscription_id],
-      kind: 'basic_plan',
-      payment_status: 'initialized',
-      status: 'deactivated',
-      expiration_date: nil
+  # TODO chage to add paypal_subscription_id
+  def update_subscription
+    current_user.subscription.update(
+      paypal_subscription_id: params[:paypal_subscription_id]
     )
   end
 

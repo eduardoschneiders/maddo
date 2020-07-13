@@ -11,14 +11,14 @@
   paypal.Buttons({
     createSubscription: function(data, actions) {
       return actions.subscription.create({
-        plan_id: '<%= @plan_id %>',
+        plan_id: '<%= @paypal_plan_id %>',
         application_context: {
           shipping_preference: 'NO_SHIPPING'
         }
       });
     },
     onApprove: function(data, actions) {
-      create_subscription(data.subscriptionID);
+      update_subscription(data.subscriptionID);
       alert('You have successfully created subscription ' + data.subscriptionID);
     },
     onCancel: function (data) {
@@ -33,12 +33,12 @@
 
 
 <script>
-  function create_subscription(id){
+  function update_subscription(id){
     var formData = new FormData();
     formData.append('paypal_subscription_id', id);
 
     fetch(
-      'http://localhost:3000/users/1/create_subscription',
+      '<%= users_update_subscription_path %>',
       {
         method: 'POST',
         body: formData

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_003232) do
+ActiveRecord::Schema.define(version: 2020_07_13_053734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,13 +57,16 @@ ActiveRecord::Schema.define(version: 2020_07_13_003232) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.string "paypal_subscription_id"
+    t.date "last_paid_at"
     t.date "expiration_date"
-    t.string "kind", default: "basic_plan"
+    t.date "next_billing_at"
     t.string "payment_status"
     t.string "status"
     t.bigint "user_id"
+    t.bigint "plan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -84,5 +87,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_003232) do
 
   add_foreign_key "orders", "users"
   add_foreign_key "plans", "paypal_plans"
+  add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
 end

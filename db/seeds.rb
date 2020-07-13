@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.find_or_create_by(email: 'eduardo.m.schneiders@gmail.com').update(password: 'password')
+User.find_or_create_by(email: 'eduardo.m.schneiders@gmail.com')
+  .update(password: 'eduardo', password_confirmation: 'eduardo')
 
 PlanPrice.find_or_create_by(kind: 'private_lessons').tap do |plan_prince|
   plan_prince.prices = [
@@ -38,10 +39,14 @@ end
 
 PaypalPlan.find_or_create_by(
   external_id: 'P-8JN56176UF382904TL4FDBUA',
-  name: 'Plano mensal com 1 aula particular e 1 semana de olhadinha',
+  name: 'z mensal com 1 aula particular e 1 semana de olhadinha',
   description: 'regular_class_0_private_lessons_1_with_1_weekly_experience',
   regular_price: 90,
   week_experience_price: 40
 )
+
+plan = PlanBuilder.new(regular_classes_per_week: 0, private_lessons_per_month: 1, week_experience: true).build
+plan.save
+Subscription.create(user: User.first, plan: plan, status: 'initialized')
 
 p ('-' * 100) + ' Seed done'

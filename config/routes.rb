@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'class/index'
 
-  post 'users/:id/create_subscription' => 'users#create_subscription'
+  post 'users/update_subscription' => 'users#update_subscription'
   post 'users/:id/create_order' => 'users#create_order'
 
-  get 'checkout/subscription', as: :create_subscription
+  get 'checkout/build_your_plan', as: :build_your_plan
+  post 'checkout/generate_plan', as: :generate_plan
+  get 'checkout/confirm_subscription', as: :confirm_subscription
   get 'checkout/order', as: :create_order
   post 'webhook/paypal/' => 'webhookpaypal#create'
 end
