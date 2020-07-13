@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_042121) do
+ActiveRecord::Schema.define(version: 2020_07_13_003232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 2020_07_12_042121) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string "name"
+    t.integer "regular_price"
+    t.integer "week_experience_price"
+    t.integer "regular_classes_per_week_count"
+    t.integer "private_lessons_per_month"
+    t.bigint "paypal_plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paypal_plan_id"], name: "index_plans_on_paypal_plan_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.string "paypal_subscription_id"
     t.date "expiration_date"
@@ -71,5 +83,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_042121) do
   end
 
   add_foreign_key "orders", "users"
+  add_foreign_key "plans", "paypal_plans"
   add_foreign_key "subscriptions", "users"
 end

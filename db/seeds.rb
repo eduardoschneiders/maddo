@@ -30,10 +30,18 @@ PlanPrice.find_or_create_by(kind: 'regular_classes').tap do |plan_prince|
   plan_prince.save
 end
 
-PlanPrice.find_or_create_by(kind: 'week_trial').tap do |plan_prince|
+PlanPrice.find_or_create_by(kind: 'week_experience').tap do |plan_prince|
   plan_prince.prices = [ { price: 40 } ]
 
   plan_prince.save
 end
+
+PaypalPlan.find_or_create_by(
+  external_id: 'P-8JN56176UF382904TL4FDBUA',
+  name: 'Plano mensal com 1 aula particular e 1 semana de olhadinha',
+  description: 'regular_class_0_private_lessons_1_with_1_weekly_experience',
+  regular_price: 90,
+  week_experience_price: 40
+)
 
 p ('-' * 100) + ' Seed done'
