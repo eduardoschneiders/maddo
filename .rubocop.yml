@@ -6,6 +6,8 @@ AllCops:
     - 'config/puma.rb'
     - 'config/initializers/devise.rb'
     - 'bin/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 Bundler/OrderedGems:
@@ -15,6 +17,8 @@ Style/Documentation:
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/SymbolArray:
+  Enabled: false
+Layout/ArgumentAlignment:
   Enabled: false
 Layout/LineLength:
   Max: 120

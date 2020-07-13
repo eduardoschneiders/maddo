@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :plan do
-    name { "MyString" }
+    name { 'Plano mensal com uma aula particular' }
     regular_price { 1 }
     week_experience_price { 1 }
     regular_classes_per_week { 1 }

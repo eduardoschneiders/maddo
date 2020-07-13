@@ -4,7 +4,6 @@ describe Paypal::SyncPlansService, vcr: {
   cassette_name: 'paypal/plans',
   record: :once
 } do
-
   before do
     described_class.new.sync
   end

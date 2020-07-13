@@ -32,7 +32,18 @@ class PlanBuilder
   end
 
   def build_description_key
-    weekly_experiece = week_experience ? 1 : 0
-    "regular_class_#{regular_classes_per_week}_private_lessons_#{private_lessons_per_month}_with_#{weekly_experiece}_weekly_experience"
+    regular_key + private_lessons_key + weekly_experiece_key
+  end
+
+  def regular_key
+    "regular_class_#{regular_classes_per_week}"
+  end
+
+  def private_lessons_key
+    "_private_lessons_#{private_lessons_per_month}"
+  end
+
+  def weekly_experiece_key
+    "_with_#{week_experience ? 1 : 0}_weekly_experience"
   end
 end

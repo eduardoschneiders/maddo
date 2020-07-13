@@ -68,7 +68,7 @@ module Paypal
     end
 
     def log(plan)
-      Rails::logger.info(
+      Rails.logger.info(
         <<-LOG
           [SyncPlansService] plan synced.
           external_id: #{plan.external_id},
