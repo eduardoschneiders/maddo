@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_003232) do
     t.string "name"
     t.integer "regular_price"
     t.integer "week_experience_price"
-    t.integer "regular_classes_per_week_count"
+    t.integer "regular_classes_per_week"
     t.integer "private_lessons_per_month"
     t.bigint "paypal_plan_id"
     t.datetime "created_at", null: false
