@@ -1,23 +1,19 @@
 class CheckoutController < AuthenticatedController
   before_action :find_plan_prices, only: [:build_your_plan]
   def build_your_plan
-    @private_lessons_prices = @private_lessons.prices.map do |p|
-      ["#{p[:count]} -  #{helpers.number_to_currency(p[:price], unit: 'R$')}", p[:count]]
-    end
+    @private_lessons_prices = @private_lessons.prices.map { |price| select_values(price) }
 
-    @regular_classes_prices = @regular_classes.prices.map do |p|
-      ["#{p[:count]} -  #{helpers.number_to_currency(p[:price], unit: 'R$')}", p[:count]]
-    end
+    @regular_classes_prices = @regular_classes.prices.map { |price| select_values(price) }
 
     @week_experience_price = @week_experience.prices.first[:price]
   end
 
   def generate_plan
-
     plan = PlanBuilder.new(
       regular_classes_per_week: params[:regular_classes_per_week],
       private_lessons_per_month: params[:private_lessons_per_month],
-      week_experience: params[:week_experience]).build
+      week_experience: params[:week_experience]
+    ).build
 
     plan.save
 
@@ -45,5 +41,9 @@ class CheckoutController < AuthenticatedController
     @week_experience = PlanPrice.find_by(kind: 'week_experience')
 
     raise Errors::PlanBuilderErrors::PlanPriceNotFound unless @private_lessons && @regular_classes && @week_experience
+  end
+
+  def select_values(price)
+    ["#{price[:count]} -  #{helpers.number_to_currency(price[:price], unit: 'R$')}", price[:count]]
   end
 end

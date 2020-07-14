@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:update_subscription, :create_order]
 
-  # TODO chage to add paypal_subscription_id
+  # TODO: chage to add paypal_subscription_id
   def update_subscription
     current_user.subscription.update(
       paypal_subscription_id: params[:paypal_subscription_id]
