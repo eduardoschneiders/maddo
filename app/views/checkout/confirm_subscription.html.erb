@@ -18,7 +18,7 @@
       });
     },
     onApprove: function(data, actions) {
-      update_subscription(data.subscriptionID);
+      add_paypal_subscription_id(data.subscriptionID);
       alert('You have successfully created subscription ' + data.subscriptionID);
     },
     onCancel: function (data) {
@@ -33,12 +33,12 @@
 
 
 <script>
-  function update_subscription(id){
+  function add_paypal_subscription_id(id){
     var formData = new FormData();
     formData.append('paypal_subscription_id', id);
 
     fetch(
-      '<%= users_update_subscription_path %>',
+      '<%= users_add_paypal_subscription_id_path %>',
       {
         method: 'POST',
         body: formData

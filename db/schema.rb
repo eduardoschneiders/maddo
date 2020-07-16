@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_053734) do
     t.date "last_paid_at"
     t.date "expiration_date"
     t.date "next_billing_at"
-    t.string "payment_status"
     t.string "status"
+    t.string "status_changes"
+    t.string "payment_status"
+    t.string "payment_status_changes"
     t.bigint "user_id"
     t.bigint "plan_id"
     t.datetime "created_at", null: false
@@ -78,9 +80,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_053734) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
-    t.string "paypal_subscription_id"
-    t.string "payment_status"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

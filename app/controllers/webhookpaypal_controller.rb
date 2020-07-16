@@ -3,9 +3,7 @@ class WebhookpaypalController < ApplicationController
 
   def create
     log
-
     handle(params)
-
     head :created
   rescue ActiveRecord::RecordNotFound
     Rails.logger.error(

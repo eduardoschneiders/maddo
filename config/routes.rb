@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'class/index'
 
-  post 'users/update_subscription' => 'users#update_subscription'
+  post 'users/add_paypal_subscription_id' => 'users#add_paypal_subscription_id'
   post 'users/:id/create_order' => 'users#create_order'
 
   get 'checkout/build_your_plan', as: :build_your_plan

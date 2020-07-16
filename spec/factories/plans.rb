@@ -5,6 +5,6 @@ FactoryBot.define do
     week_experience_price { 1 }
     regular_classes_per_week { 1 }
     private_lessons_per_month { 1 }
-    paypal_plans { nil }
+    paypal_plan { build :paypal_plan }
   end
 end

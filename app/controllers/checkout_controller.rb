@@ -17,7 +17,7 @@ class CheckoutController < AuthenticatedController
 
     plan.save
 
-    Subscription.create(user: current_user, plan: plan, status: 'initialized')
+    Subscription.find_or_create_by(user: current_user).update(plan: plan, status: 'initialized')
 
     redirect_to confirm_subscription_path
   end
@@ -26,7 +26,6 @@ class CheckoutController < AuthenticatedController
     @paypal_plan_id = current_user.subscription.plan.paypal_plan.external_id
 
     @client_id = 'AdAJmAnzt0JI197z9fx2GGaBbRajduTaq_XOjlX9BGl6iICxU5NlbZjTyTyzEqp4zoBJE4D4rR0z5Daq'
-    # @plan_id = 'P-273045463V5596003L4BWRKQ'
   end
 
   def order
