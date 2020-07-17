@@ -47,6 +47,6 @@ PaypalPlan.find_or_create_by(
 
 plan = PlanBuilder.new(regular_classes_per_week: 0, private_lessons_per_month: 1, week_experience: true).build
 plan.save
-Subscription.create(user: User.first, plan: plan, status: 'initialized')
+Subscription.create(user: User.first, plan: plan)
 
 p ('-' * 100) + ' Seed done'

@@ -10,15 +10,19 @@ RSpec.describe 'Webhookpaypal', type: :request do
 
     let(:params) do
       {
-        resource_type: 'subscription',
+        resource_type: resource_type,
         event_type: event_type,
         resource: {
-          id: subscription.paypal_subscription_id
+          id: resource_id,
+          billing_agreement_id: resource_billing_agreement_id
         }
       }
     end
 
+    let(:resource_type) { 'subscription' }
     let(:event_type) { 'BILLING.SUBSCRIPTION.CREATED' }
+    let(:resource_id) { subscription.paypal_subscription_id }
+    let(:resource_billing_agreement_id) { nil }
 
     let(:subscription) do
       create(:subscription,
@@ -53,7 +57,9 @@ RSpec.describe 'Webhookpaypal', type: :request do
     end
 
     context 'when event is PAYMENT.SALE.COMPLETED' do
+      let(:resource_type) { 'sale' }
       let(:event_type) { 'PAYMENT.SALE.COMPLETED' }
+      let(:resource_billing_agreement_id) { subscription.paypal_subscription_id }
 
       it 'set the subscription to the state payment_created' do
         expect(subscription).to be_active

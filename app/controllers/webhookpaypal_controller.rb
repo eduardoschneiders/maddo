@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/MethodLength
 class WebhookpaypalController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -22,6 +21,8 @@ class WebhookpaypalController < ApplicationController
       handle_order(resource: params['resource'], event_type: params['event_type'])
     when 'subscription'
       handle_subscription(resource: params['resource'], event_type: params['event_type'])
+    when 'sale'
+      handle_sale(resource: params['resource'], event_type: params['event_type'])
     end
   end
 
@@ -33,17 +34,20 @@ class WebhookpaypalController < ApplicationController
       subscription.create_subscription_payment!
     when 'BILLING.SUBSCRIPTION.ACTIVATED'
       subscription.activate_subscription_payment!
-    when 'PAYMENT.SALE.COMPLETED'
-      subscription.complete_sale_payment!
     else
       log_error("Event type: #{event_type} not found for subscription id: ##{resource['id']}")
     end
+  end
 
-    # subscription.update(
-    #   payment_status: event_type,
-    #   next_billing_time: params['resource']['billing_info']['next_billing_time']
-    # )
-    subscription.update(payment_status: event_type)
+  def handle_sale(resource:, event_type:)
+    subscription = find_subscription!(resource['billing_agreement_id'])
+
+    case event_type
+    when 'PAYMENT.SALE.COMPLETED'
+      subscription.complete_sale_payment!
+    else
+      log_error("Event type: #{event_type} not found for subscription id: ##{resource['billing_agreement_id']}")
+    end
   end
 
   def find_subscription!(id)
@@ -65,4 +69,3 @@ class WebhookpaypalController < ApplicationController
     Rails.logger.info("WebhookpaypalController(error): #{msg}")
   end
 end
-# rubocop:enable Metrics/MethodLength
