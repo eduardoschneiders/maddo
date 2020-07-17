@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   post 'checkout/generate_plan', as: :generate_plan
   get 'checkout/confirm_subscription', as: :confirm_subscription
   get 'checkout/order', as: :create_order
-  post 'webhook/paypal/' => 'webhookpaypal#create'
+  post 'webhook/paypal/' => 'webhookpaypal#create', as: :webhookpaypal
 end
