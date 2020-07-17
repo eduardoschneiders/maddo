@@ -62,8 +62,10 @@ ActiveRecord::Schema.define(version: 2020_07_13_053734) do
     t.date "next_billing_at"
     t.string "status"
     t.string "status_changes"
+    t.string "status_changes_attempts"
     t.string "payment_status"
     t.string "payment_status_changes"
+    t.string "payment_status_changes_attempts"
     t.bigint "user_id"
     t.bigint "plan_id"
     t.datetime "created_at", null: false
