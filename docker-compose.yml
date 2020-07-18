@@ -1,11 +1,13 @@
 version: '3'
 services:
-  db:
+  postgres:
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
+      - POSTGRES_USER=heroku_username
+      - POSTGRES_PASSWORD=heroku_password
+      - POSTGRES_DB=app_development
   web:
     stdin_open: true
     tty: true
@@ -16,4 +18,4 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - postgres
