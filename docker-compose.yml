@@ -6,7 +6,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
-  app:
+  web:
     stdin_open: true
     tty: true
     build: .

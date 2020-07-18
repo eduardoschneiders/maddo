@@ -5,4 +5,4 @@ setup:
 
 build:
   docker:
-    app: Dockerfile
+    web: Dockerfile
