@@ -25,7 +25,7 @@ class CheckoutController < AuthenticatedController
   def confirm_subscription
     @paypal_plan_id = current_user.subscription.plan.paypal_plan.external_id
 
-    @client_id = 'AdAJmAnzt0JI197z9fx2GGaBbRajduTaq_XOjlX9BGl6iICxU5NlbZjTyTyzEqp4zoBJE4D4rR0z5Daq'
+    @paypal_client_id = ENV['PAYPAL_CLIENT_ID']
   end
 
   def order
