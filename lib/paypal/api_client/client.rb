@@ -2,8 +2,8 @@ module Paypal
   module ApiClient
     class Client
       HOST = 'https://api.sandbox.paypal.com'.freeze
-      USER = Rails.application.credentials.dig(:paypal, :auth, :user)
-      SECRET = Rails.application.credentials.dig(:paypal, :auth, :secret)
+      USER = Rails.application.credentials.dig(Rails.env.to_sym, :paypal, :client_id)
+      SECRET = Rails.application.credentials.dig(Rails.env.to_sym, :paypal, :secret)
 
       def fetch_plans(params: {})
         url = HOST + '/v1/billing/plans'
