@@ -12,8 +12,6 @@ module Errors
         super(message)
       end
 
-      private
-
       def message
         <<-MESSAGE.squish
           Error tring to build plan with params:
