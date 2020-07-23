@@ -9,7 +9,6 @@ class CheckoutController < AuthenticatedController
   end
 
   def generate_plan
-    p "#{'=' * 100} generate_plan "
     plan = PlanBuilder.new(
       regular_classes_per_week: params[:regular_classes_per_week],
       private_lessons_per_month: params[:private_lessons_per_month],

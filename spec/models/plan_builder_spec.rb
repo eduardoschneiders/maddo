@@ -59,9 +59,15 @@ describe PlanBuilder do
   let(:private_lessons_per_month) { 0 }
   let(:week_experience) { false }
 
-  shared_examples 'raise error' do
+  shared_examples 'raise error' do |regular_classes_per_week, private_lessons_per_month, week_experience|
     it 'should raise error' do
-      expect { subject }.to raise_error Errors::PlanBuilderErrors::PaypalPlanNotFound
+      expect { subject }.to raise_error do |error|
+        expect(error).to be_a(Errors::PlanBuilderErrors::PaypalPlanNotFound)
+
+        expect(error.regular_classes_per_week).to eql(regular_classes_per_week)
+        expect(error.private_lessons_per_month).to eql(private_lessons_per_month)
+        expect(error.week_experience).to eql(week_experience)
+      end
     end
   end
 
@@ -70,19 +76,19 @@ describe PlanBuilder do
     let(:private_lessons_per_month) { 0 }
     let(:week_experience) { false }
 
-    it_should_behave_like 'raise error'
+    it_should_behave_like 'raise error', 0, 0, false
 
     context 'when select just week experience' do
       let(:week_experience) { false }
 
-      it_should_behave_like 'raise error'
+      it_should_behave_like 'raise error', 0, 0, false
     end
   end
 
   context 'when select an invalid count' do
     let(:private_lessons_per_month) { 20 }
 
-    it_should_behave_like 'raise error'
+    it_should_behave_like 'raise error', 0, 20, false
   end
 
   context 'when select one regular' do

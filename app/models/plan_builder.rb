@@ -28,7 +28,11 @@ class PlanBuilder
   end
 
   def raise_error
-    raise Errors::PlanBuilderErrors::PaypalPlanNotFound
+    raise Errors::PlanBuilderErrors::PaypalPlanNotFound.new(
+      regular_classes_per_week: regular_classes_per_week,
+      private_lessons_per_month: private_lessons_per_month,
+      week_experience: week_experience
+    )
   end
 
   def build_description_key
