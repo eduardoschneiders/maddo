@@ -1,12 +1,6 @@
 # rubocop:disable Metrics/MethodLength, Layout/LineLength, Metrics/AbcSize
 module Paypal
   class PlanCombinationsBuilder
-    attr_reader :client
-
-    def initialize
-      @client = Paypal::ApiClient::Client.new
-    end
-
     def build
       private_combinations
         .concat(regular_combinations)
