@@ -10,6 +10,12 @@
 #   inflect.uncountable %w( fish sheep )
 # end
 
+ActiveSupport::Inflector.inflections(:'pt-BR') do |inflect|
+  inflect.plural 'regular', 'regulares'
+  inflect.plural 'particular', 'partculares'
+  inflect.plural 'aula', 'aulas'
+end
+
 # These inflection rules are supported but not enabled by default:
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
