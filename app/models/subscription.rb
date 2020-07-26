@@ -57,7 +57,8 @@ class Subscription < ApplicationRecord
       transitions from: [
         :payment_initialized,
         :payment_subscription_created,
-        :payment_subscription_activated
+        :payment_subscription_activated,
+        :payment_sale_completed
       ],
                   to: :payment_sale_completed
     end
@@ -139,6 +140,7 @@ class Subscription < ApplicationRecord
   def update_billing_dates!
     update!(
       next_billing_at: agreement[:agreement_details][:next_billing_date],
+      expiration_date: agreement[:agreement_details][:next_billing_date],
       last_paid_at: agreement[:agreement_details][:last_payment_date]
     )
   end

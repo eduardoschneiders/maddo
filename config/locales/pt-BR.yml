@@ -1,4 +1,8 @@
 pt-BR:
+  date:
+    formats:
+      default: '%d/%m/%Y'
+      short: '%d/%m/%Y'
   subscriptions_page:
     statuses:
       initialized: Inicializado

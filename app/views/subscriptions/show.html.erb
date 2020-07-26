@@ -6,11 +6,13 @@
 
 <div class="row justify-content-md-center">
   <div class="col-md-auto">
-    Last payment at: <%= current_user.subscription.last_paid_at %><br />
-    Expiration date: <%= current_user.subscription.expiration_date %><br />
-    Next billing at: <%= current_user.subscription.next_billing_at %><br />
+    Last payment at: <%= I18n.l(current_user.subscription.last_paid_at, default: '-') %><br />
+    Expiration date: <%= I18n.l(current_user.subscription.expiration_date, default: '-') %><br />
+    Next billing at: <%= I18n.l(current_user.subscription.next_billing_at, default: '-') %><br />
+
     Status: <%= t "subscriptions_page.statuses.#{current_user.subscription.status}" %><br />
     Payment status: <%= t "subscriptions_page.payment_statuses.#{current_user.subscription.payment_status}" %><br />
+    <br /><br />
 
     <h3>Dados do plano:</h3>
 
