@@ -45,6 +45,8 @@ module Paypal
 
     def private_and_regular_combinations
       private_plan_price.prices.map do |private_price|
+        private_price[:price] = 75 if private_price[:count] == 1
+
         regular_plan_price.prices.map do |regular_price|
           [
             {
@@ -54,7 +56,7 @@ module Paypal
               regular_price: regular_price[:price] + private_price[:price],
               week_experience_price: 0,
               name: "#{regular_price[:count]} #{'aula'.pluralize(regular_price[:count], :'pt-BR')} #{'regular'.pluralize(regular_price[:count], :'pt-BR')} por semana, mais #{private_price[:count]} #{'aula'.pluralize(private_price[:count], :'pt-BR')} #{'particular'.pluralize(private_price[:count], :'pt-BR')} por mês",
-              description: "regular_class_#{regular_price[:count]}_private_lessons_#{regular_price[:count]}_with_0_weekly_experience"
+              description: "regular_class_#{regular_price[:count]}_private_lessons_#{private_price[:count]}_with_0_weekly_experience"
             }
           ]
         end
