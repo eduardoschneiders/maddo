@@ -1,0 +1,22 @@
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    <h1>Subscriptions</h1>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    Last payment at: <%= current_user.subscription.last_paid_at %><br />
+    Expiration date: <%= current_user.subscription.expiration_date %><br />
+    Next billing at: <%= current_user.subscription.next_billing_at %><br />
+    Status: <%= current_user.subscription.status %><br />
+    Payment status: <%= current_user.subscription.payment_status %><br />
+
+    <h3>Dados do plano:</h3>
+
+    Plan name: <%= current_user.subscription.plan.name %><br />
+    Monthly value: <%= number_to_currency(current_user.subscription.plan.regular_price, unit: 'R$') %><br />
+    Regular classes per week: <%= current_user.subscription.plan.regular_classes_per_week %><br />
+    Private lessons per month: <%= current_user.subscription.plan.private_lessons_per_month %><br />
+  </div>
+</div>

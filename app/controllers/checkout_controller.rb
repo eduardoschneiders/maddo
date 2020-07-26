@@ -1,5 +1,6 @@
 class CheckoutController < AuthenticatedController
   before_action :find_plan_prices, only: [:build_your_plan]
+
   def build_your_plan
     @private_lessons_prices = @private_lessons.prices.map { |price| select_values(price) }
 
