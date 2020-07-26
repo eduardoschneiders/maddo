@@ -1,8 +1,9 @@
+# rubocop:disable Metrics/BlockLength
 require 'rails_helper'
 
 describe Paypal::UploadPlansService, vcr: {
   cassette_name: 'paypal/upload_plans',
-  record: :all
+  record: :once
 } do
   before do
     private_plan_price
@@ -83,7 +84,8 @@ describe Paypal::UploadPlansService, vcr: {
     described_class.new.upload
   end
 
-  it 'TODO' do
+  it 'should not raise error' do
     expect { subject }.not_to raise_error
   end
 end
+# rubocop:enable Metrics/BlockLength

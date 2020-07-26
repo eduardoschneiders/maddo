@@ -76,6 +76,7 @@ class Subscription < ApplicationRecord
   private
 
   def activate_subscription
+    update_billing_dates!
     activate!
   end
 
@@ -133,6 +134,30 @@ class Subscription < ApplicationRecord
       from: aasm(:payment_status).from_state.to_s,
       to: aasm(:payment_status).to_state.to_s
     }
+  end
+
+  def update_billing_dates!
+    update!(
+      next_billing_at: agreement[:agreement_details][:next_billing_date],
+      last_paid_at: agreement[:agreement_details][:last_payment_date]
+    )
+  end
+
+  def agreement
+    @agreement ||= fetch_agreement
+  rescue RestClient::BadRequest
+    raise_billing_not_found
+  end
+
+  def fetch_agreement
+    client = Paypal::ApiClient::Client.new
+    client.billing_agreement(id: paypal_subscription_id)
+  end
+
+  def raise_billing_not_found
+    raise Paypal::Errors::BillingAgreementNotFound.new(
+      paypal_subscription_id: paypal_subscription_id
+    )
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/ClassLength

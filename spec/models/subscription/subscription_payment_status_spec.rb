@@ -54,6 +54,7 @@ RSpec.describe Subscription, type: :model do
 
   describe 'payment_sale_completed' do
     before do
+      allow(subject).to receive(:update_billing_dates!)
       subject.complete_sale_payment!
     end
 

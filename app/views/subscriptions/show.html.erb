@@ -9,8 +9,8 @@
     Last payment at: <%= current_user.subscription.last_paid_at %><br />
     Expiration date: <%= current_user.subscription.expiration_date %><br />
     Next billing at: <%= current_user.subscription.next_billing_at %><br />
-    Status: <%= current_user.subscription.status %><br />
-    Payment status: <%= current_user.subscription.payment_status %><br />
+    Status: <%= t "subscriptions_page.statuses.#{current_user.subscription.status}" %><br />
+    Payment status: <%= t "subscriptions_page.payment_statuses.#{current_user.subscription.payment_status}" %><br />
 
     <h3>Dados do plano:</h3>
 

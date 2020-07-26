@@ -73,7 +73,7 @@ describe Paypal::PlanCombinationsBuilder do
       regular_price: 1210,
       week_experience_price: 0,
       name: '5 aulas regulares por semana, mais 12 aulas partculares por mês',
-      description: 'regular_class_5_private_lessons_5_with_0_weekly_experience'
+      description: 'regular_class_5_private_lessons_12_with_0_weekly_experience'
     }
   end
 

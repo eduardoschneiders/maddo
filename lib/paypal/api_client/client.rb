@@ -24,7 +24,16 @@ module Paypal
           default_headers
         )
 
-          JSON.parse(response)
+        JSON.parse(response)
+      end
+
+      def billing_agreement(id:)
+        response = RestClient.get(
+          "#{HOST}/v1/payments/billing-agreements/#{id}",
+          default_headers
+        )
+
+        JSON.parse(response, symbolize_names: true)
       end
 
       private

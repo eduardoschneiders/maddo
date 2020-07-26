@@ -1,2 +1,14 @@
 pt-BR:
-  hello: "Hello world"
+  subscriptions_page:
+    statuses:
+      initialized: Inicializado
+      active: Ativo
+      suspended: Suspenso
+      canceled: Cancelado
+
+    payment_statuses:
+      payment_initialized: Pagamento inicializado
+      payment_subscription_created: Pagamento criado
+      payment_subscription_activated: Pagamento ativado
+      payment_sale_completed: Pagamento completado
+      payment_subscription_canceled: Assinatura cancelada
