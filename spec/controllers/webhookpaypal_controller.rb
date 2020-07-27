@@ -4,8 +4,15 @@ require 'rails_helper'
 RSpec.describe 'Webhookpaypal', type: :request do
   describe 'POST create' do
     before do
+      allow_any_instance_of(Paypal::ApiClient::Client).to receive(:cancel_subscription)
+      allow_any_instance_of(Paypal::ApiClient::Client).to receive(:billing_agreement).and_return(agreement_details)
+
       post webhookpaypal_path, params: params
       subscription.reload
+    end
+
+    let(:agreement_details) do
+      { agreement_details: { next_billing_date: '2020-07-27' } }
     end
 
     let(:params) do
@@ -64,6 +71,17 @@ RSpec.describe 'Webhookpaypal', type: :request do
       it 'set the subscription to the state payment_created' do
         expect(subscription).to be_active
         expect(subscription).to be_payment_sale_completed
+      end
+    end
+
+    context 'when event is BILLING.SUBSCRIPTION.CANCELLED' do
+      let(:resource_type) { 'Agreement' }
+      let(:event_type) { 'BILLING.SUBSCRIPTION.CANCELLED' }
+      let(:resource_id) { subscription.paypal_subscription_id }
+
+      it 'set the subscription to the state payment_subscription_canceled' do
+        expect(subscription).to be_canceled
+        expect(subscription).to be_payment_subscription_canceled
       end
     end
   end

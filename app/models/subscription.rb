@@ -82,7 +82,7 @@ class Subscription < ApplicationRecord
   end
 
   def cancel_subscription
-    cancel!
+    cancel! unless canceled?
   end
 
   def cancel_on_gateway!

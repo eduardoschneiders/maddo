@@ -16,13 +16,15 @@ class WebhookpaypalController < ApplicationController
   private
 
   def handle(params)
-    case params['resource_type']
+    case params['resource_type'].downcase
     when 'checkout-order'
       handle_order(resource: params['resource'], event_type: params['event_type'])
     when 'subscription'
       handle_subscription(resource: params['resource'], event_type: params['event_type'])
     when 'sale'
       handle_sale(resource: params['resource'], event_type: params['event_type'])
+    when 'agreement'
+      handle_agreement(resource: params['resource'], event_type: params['event_type'])
     end
   end
 
@@ -47,6 +49,17 @@ class WebhookpaypalController < ApplicationController
       subscription.complete_sale_payment!
     else
       log_error("Event type: #{event_type} not found for subscription id: ##{resource['billing_agreement_id']}")
+    end
+  end
+
+  def handle_agreement(resource:, event_type:)
+    subscription = find_subscription!(resource['id'])
+
+    case event_type
+    when 'BILLING.SUBSCRIPTION.CANCELLED'
+      subscription.cancel_subscription_payment!
+    else
+      log_error("Event type: #{event_type} not found for subscription id: ##{resource['id']}")
     end
   end
 
