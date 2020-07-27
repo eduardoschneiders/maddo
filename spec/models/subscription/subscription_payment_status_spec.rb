@@ -67,6 +67,7 @@ RSpec.describe Subscription, type: :model do
 
   describe 'payment_subscription_canceled' do
     before do
+      allow(subject).to receive(:cancel_on_gateway!)
       subject.cancel_subscription_payment!
     end
 

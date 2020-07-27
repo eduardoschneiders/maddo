@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'class/index'
 
   get 'subscriptions' => 'subscriptions#show'
+  delete 'subscriptions' => 'subscriptions#cancel'
+
   post 'users/add_paypal_subscription_id' => 'users#add_paypal_subscription_id'
   post 'users/:id/create_order' => 'users#create_order'
 

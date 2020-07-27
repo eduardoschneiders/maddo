@@ -26,7 +26,7 @@ class Subscription < ApplicationRecord
       transitions from: [:initialized, :active], to: :suspended
     end
 
-    event :cancel do
+    event :cancel, before: :cancel_on_gateway! do
       transitions from: [:initialized, :active, :suspended], to: :canceled
     end
 
@@ -83,6 +83,13 @@ class Subscription < ApplicationRecord
 
   def cancel_subscription
     cancel!
+  end
+
+  def cancel_on_gateway!
+    update!(canceled_at: Date.today)
+    paypal_client.cancel_subscription(paypal_subscription_id: paypal_subscription_id)
+  rescue RestClient::BadRequest
+    raise_billing_not_found
   end
 
   def log_status_changes_attempts
@@ -152,14 +159,17 @@ class Subscription < ApplicationRecord
   end
 
   def fetch_agreement
-    client = Paypal::ApiClient::Client.new
-    client.billing_agreement(id: paypal_subscription_id)
+    paypal_client.billing_agreement(paypal_subscription_id: paypal_subscription_id)
   end
 
   def raise_billing_not_found
     raise Paypal::Errors::BillingAgreementNotFound.new(
       paypal_subscription_id: paypal_subscription_id
     )
+  end
+
+  def paypal_client
+    @paypal_client ||= Paypal::ApiClient::Client.new
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/ClassLength

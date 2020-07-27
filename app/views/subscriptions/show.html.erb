@@ -9,8 +9,12 @@
     Last payment at: <%= I18n.l(current_user.subscription.last_paid_at, default: '-') %><br />
     Expiration date: <%= I18n.l(current_user.subscription.expiration_date, default: '-') %><br />
     Next billing at: <%= I18n.l(current_user.subscription.next_billing_at, default: '-') %><br />
-
+    Canceled at: <%= I18n.l(current_user.subscription.canceled_at, default: '-') %><br />
     Status: <%= t "subscriptions_page.statuses.#{current_user.subscription.status}" %><br />
+    <%= link_to 'Cancelar assinatura', subscriptions_path, method: :delete, data: {
+        confirm: "Tem certeza que deseja cancelar?"
+      } %>
+
     Payment status: <%= t "subscriptions_page.payment_statuses.#{current_user.subscription.payment_status}" %><br />
     <br /><br />
 
