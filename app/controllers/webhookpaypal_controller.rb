@@ -73,6 +73,7 @@ class WebhookpaypalController < ApplicationController
   end
 
   def log
+    p params.inspect
     Rails.logger.info('-' * 100)
     Rails.logger.info(params.inspect)
     Rails.logger.info('-' * 100)

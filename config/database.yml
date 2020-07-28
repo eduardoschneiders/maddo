@@ -10,6 +10,9 @@ development:
   <<: *default
   database: app_development
 
+staging:
+  <<: *default
+  database: app_staging
 
 test:
   <<: *default
