@@ -2,7 +2,6 @@ class WebhookpaypalController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    log
     handle(params)
     head :created
   rescue ActiveRecord::RecordNotFound
@@ -16,7 +15,7 @@ class WebhookpaypalController < ApplicationController
   private
 
   def handle(params)
-    case params['resource_type'].downcase
+    case params['resource_type'].to_s.downcase
     when 'checkout-order'
       handle_order(resource: params['resource'], event_type: params['event_type'])
     when 'subscription'
@@ -70,13 +69,6 @@ class WebhookpaypalController < ApplicationController
   def handle_order(resource:, event_type:)
     subscription = Order.find_by_paypal_order_id!(resource['id'])
     subscription.update(payment_status: event_type)
-  end
-
-  def log
-    p params.inspect
-    Rails.logger.info('-' * 100)
-    Rails.logger.info(params.inspect)
-    Rails.logger.info('-' * 100)
   end
 
   def log_error(msg)
