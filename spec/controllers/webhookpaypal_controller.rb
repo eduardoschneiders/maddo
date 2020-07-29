@@ -75,7 +75,7 @@ RSpec.describe 'Webhookpaypal', type: :request do
     end
 
     context 'when event is BILLING.SUBSCRIPTION.CANCELLED' do
-      let(:resource_type) { 'Agreement' }
+      let(:resource_type) { 'subscription' }
       let(:event_type) { 'BILLING.SUBSCRIPTION.CANCELLED' }
       let(:resource_id) { subscription.paypal_subscription_id }
 
