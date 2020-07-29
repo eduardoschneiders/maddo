@@ -4,6 +4,20 @@ pt-BR:
       default: '%d/%m/%Y'
       short: '%d/%m/%Y'
   subscriptions_page:
+    labels:
+      last_payment_at: Ultimo pagamento
+      expiration_date: Data de expiração
+      next_billing_at: Próxima cobrança
+      canceled_at: Data de cancelamento
+      status: Status
+      cancel: Cancelar assinatura
+      sure: Tem certeza que deseja cancelar?
+      payment_status: Status do pagamento
+      plan_data: Dados do plano
+      plan_name: Nome do plano
+      monthly_value: Valor mensal
+      regular_classes_per_week: Aulas regulares por semana
+      private_lessons_per_month: Aulas particulares por mês
     statuses:
       initialized: Inicializado
       active: Ativo

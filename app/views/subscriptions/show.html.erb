@@ -6,23 +6,43 @@
 
 <div class="row justify-content-md-center">
   <div class="col-md-auto">
-    Last payment at: <%= I18n.l(current_user.subscription.last_paid_at, default: '-') %><br />
-    Expiration date: <%= I18n.l(current_user.subscription.expiration_date, default: '-') %><br />
-    Next billing at: <%= I18n.l(current_user.subscription.next_billing_at, default: '-') %><br />
-    Canceled at: <%= I18n.l(current_user.subscription.canceled_at, default: '-') %><br />
-    Status: <%= t "subscriptions_page.statuses.#{current_user.subscription.status}" %><br />
-    <%= link_to 'Cancelar assinatura', subscriptions_path, method: :delete, data: {
-        confirm: "Tem certeza que deseja cancelar?"
-      } %>
 
-    Payment status: <%= t "subscriptions_page.payment_statuses.#{current_user.subscription.payment_status}" %><br />
+    <%= t 'subscriptions_page.labels.last_payment_at' %>:
+    <%= I18n.l(current_user.subscription.last_paid_at, default: '-') %><br />
+
+    <%= t 'subscriptions_page.labels.expiration_date' %>:
+    <%= I18n.l(current_user.subscription.expiration_date, default: '-') %><br />
+
+    <%= t 'subscriptions_page.labels.next_billing_at' %>:
+    <%= I18n.l(current_user.subscription.next_billing_at, default: '-') %><br />
+
+    <%= t 'subscriptions_page.labels.canceled_at' %>:
+    <%= I18n.l(current_user.subscription.canceled_at, default: '-') %><br />
+
+    <%= t 'subscriptions_page.labels.status' %>:
+    <%= t "subscriptions_page.statuses.#{current_user.subscription.status}" %> -
+
+    <%= link_to t('subscriptions_page.labels.cancel'), subscriptions_path, method: :delete, data: {
+        confirm: t('subscriptions_page.labels.sure')
+      } %>
+      <br />
+
+    <%= t 'subscriptions_page.labels.payment_status' %>:
+    <%= t "subscriptions_page.payment_statuses.#{current_user.subscription.payment_status}" %><br />
     <br /><br />
 
-    <h3>Dados do plano:</h3>
+    <h3><%= t 'subscriptions_page.labels.plan_data' %></h3>
 
-    Plan name: <%= current_user.subscription.plan.name %><br />
-    Monthly value: <%= number_to_currency(current_user.subscription.plan.regular_price, unit: 'R$') %><br />
-    Regular classes per week: <%= current_user.subscription.plan.regular_classes_per_week %><br />
-    Private lessons per month: <%= current_user.subscription.plan.private_lessons_per_month %><br />
+    <%= t 'subscriptions_page.labels.plan_name' %>:
+    <%= current_user.subscription.plan.name %><br />
+
+    <%= t 'subscriptions_page.labels.monthly_value' %>
+    <%= number_to_currency(current_user.subscription.plan.regular_price, unit: 'R$') %><br />
+
+    <%= t 'subscriptions_page.labels.regular_classes_per_week' %>
+    <%= current_user.subscription.plan.regular_classes_per_week %><br />
+
+    <%= t 'subscriptions_page.labels.private_lessons_per_month' %>
+    <%= current_user.subscription.plan.private_lessons_per_month %><br />
   </div>
 </div>
