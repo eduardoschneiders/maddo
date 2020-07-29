@@ -87,6 +87,8 @@ class Subscription < ApplicationRecord
 
   def cancel_on_gateway!
     update!(canceled_at: Date.today)
+    return if payment_subscription_canceled?
+
     paypal_client.cancel_subscription(paypal_subscription_id: paypal_subscription_id)
   rescue RestClient::BadRequest
     raise_billing_not_found
