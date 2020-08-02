@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   .rails-default-error-page {
-    background-color: #EFEFEF;
+    background-color: #fc1111;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
@@ -51,17 +51,40 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  .wrapper {
+    background-color: #130531;
+
+  }
+
+  .container {
+    width: 700px;
+    margin: 50px auto 0 auto;
+    text-align: center;
+  }
+
+  .container h2 {
+    font-family: "Open Sans", Helvetica, Arial;
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .container p {
+    font-family: "Open Sans", Helvetica, Arial;
+    color: white;
+    font-size: 18px;
+    font-weight: 300;
+  }
+
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
+<body class="wrapper">
+  <div class="container">
+    <h2>Página não encontrada</h2>
+
+    <p>A página que você está procurando não existe mais ou foi movida</p>
   </div>
 </body>
 </html>
