@@ -1,18 +1,23 @@
-<h1>Build your plan</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Build your plan</h1>
 
-<%= form_with(url: generate_plan_path, method: 'post', data: {remote: false}) do |f|%>
-  <%= label_tag(:week_experience, "Quero experiência de uma semana por #{number_to_currency(@week_experience_price, unit: 'R$')}") %>
-  <%= check_box_tag(:week_experience) %>
-  <hr>
+      <%= form_with(url: generate_plan_path, method: 'post', data: {remote: false}) do |f|%>
+        <%= label_tag(:week_experience, "Quero experiência de uma semana por #{number_to_currency(@week_experience_price, unit: 'R$')}") %>
+        <%= check_box_tag(:week_experience) %>
+        <hr>
 
-  Quantos aulas particulares:
-  <%= f.select(:private_lessons_per_month,  @private_lessons_prices) %>
-  <hr>
+        Quantos aulas particulares:
+        <%= f.select(:private_lessons_per_month,  @private_lessons_prices) %>
+        <hr>
 
-  Quantos aulas regulares:
-  <%= f.select(:regular_classes_per_week,  @regular_classes_prices) %>
-  <hr>
+        Quantos aulas regulares:
+        <%= f.select(:regular_classes_per_week,  @regular_classes_prices) %>
+        <hr>
 
-  <%= submit_tag("Criar plano") %>
-<% end %>
-
+        <%= submit_tag("Criar plano") %>
+      <% end %>
+    </div>
+  </div>
+</div>

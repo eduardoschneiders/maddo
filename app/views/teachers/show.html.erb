@@ -1,12 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
 
-<p>
-  <strong>Name:</strong>
-  <%= @teacher.name %><br /><br />
+      <p>
+        <strong>Name:</strong>
+        <%= @teacher.name %><br /><br />
 
-  <% if @teacher.photo.attached? %>
-    <img src="<%= url_for(@teacher.photo.variant(combine_options: {resize: '900>', gravity: 'Center', crop: '900x200+0+0'})) %>">
-  <% end %>
-</p>
+        <% if @teacher.photo.attached? %>
+          <img src="<%= url_for(@teacher.photo.variant(combine_options: {resize: '900>', gravity: 'Center', crop: '900x200+0+0'})) %>">
+        <% end %>
+      </p>
 
-<%= link_to 'Back', teachers_path %>
+      <%= link_to 'Back', teachers_path %>
+    </div>
+  </div>
+</div>
