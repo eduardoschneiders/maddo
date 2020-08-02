@@ -16,13 +16,10 @@
       <tr>
         <td>
           <% if teacher.photo.attached? %>
-            <img src="<%= url_for(teacher.photo.variant(combine_options: {resize: '900>', gravity: 'Center', crop: '900x300+0+0'})) %>">
+            <img src="<%= url_for(teacher.photo.variant(combine_options: {resize: '900>', gravity: 'Center', crop: '900x200+0+0'})) %>">
           <% end %>
         </td>
-        <td><%= teacher.name %></td>
-        <td><%= link_to 'Show', teacher %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to teacher.name, teacher %></td>
       </tr>
     <% end %>
   </tbody>

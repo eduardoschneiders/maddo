@@ -2,8 +2,11 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @teacher.name %>
+  <%= @teacher.name %><br /><br />
+
+  <% if @teacher.photo.attached? %>
+    <img src="<%= url_for(@teacher.photo.variant(combine_options: {resize: '900>', gravity: 'Center', crop: '900x200+0+0'})) %>">
+  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
 <%= link_to 'Back', teachers_path %>

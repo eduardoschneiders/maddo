@@ -9,6 +9,9 @@
 User.find_or_create_by(email: 'eduardo.m.schneiders@gmail.com')
   .update(password: 'eduardo', password_confirmation: 'eduardo')
 
+AdminUser.find_or_create_by(email: 'admin@admin')
+  .update(password: 'admin', password_confirmation: 'admin')
+
 PlanPrice.find_or_create_by(kind: 'private_lessons').tap do |plan_prince|
   plan_prince.prices = [
     { count: 1, price: 90 },
