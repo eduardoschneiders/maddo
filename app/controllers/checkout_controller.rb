@@ -18,15 +18,15 @@ class CheckoutController < AuthenticatedController
 
     plan.save
 
-    Subscription.find_or_create_by(user: current_user).update(plan: plan, status: 'initialized')
+    current_user.subscriptions.create(plan: plan)
 
     redirect_to confirm_subscription_path
   end
 
   def confirm_subscription
-    @paypal_plan_id = current_user.subscription.plan.paypal_plan.external_id
+    @paypal_plan_id = current_user.current_subscription.plan.paypal_plan.external_id
 
-    @paypal_client_id = ENV['PAYPAL_CLIENT_ID']
+    @paypal_client_id = Rails.application.credentials.dig(Rails.env.to_sym, :paypal, :client_id)
   end
 
   def order

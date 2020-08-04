@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:add_paypal_subscription_id, :create_order]
 
   def add_paypal_subscription_id
-    current_user.subscription.update(
+    current_user.current_subscription.update(
       paypal_subscription_id: params[:paypal_subscription_id]
     )
   end

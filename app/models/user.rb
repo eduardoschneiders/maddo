@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :subscription
+  has_many :subscriptions
   has_many :orders
+
+  def current_subscription
+    subscriptions.order(created_at: :asc).last
+  end
 end
