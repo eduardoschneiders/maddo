@@ -27,6 +27,38 @@ describe Subscription, type: :model, vcr: {
     end
   end
 
+  context 'when user activate new subscription, and there is a previous subscription' do
+    subject do
+      create(
+        :subscription,
+        paypal_subscription_id: 'I-3PPUTTY7H9E3',
+        user: user
+      )
+    end
+
+    before do
+      previsou_subscription
+      subject.complete_sale_payment!
+    end
+
+    let(:user) { create(:user) }
+    let(:previsou_subscription) do
+      create(
+        :subscription,
+        paypal_subscription_id: 'I-ID-TO-CANCEL',
+        user: user
+      )
+    end
+
+    it 'should cancel previous subscriptions' do
+      expect(previsou_subscription.reload).to be_canceled
+    end
+
+    it 'should activate last subscription' do
+      expect(subject.reload).to be_active
+    end
+  end
+
   context 'when billing agreement dont exist' do
     subject do
       create(

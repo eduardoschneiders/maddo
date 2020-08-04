@@ -1,5 +1,5 @@
 Rails.application.configure do
-  p ('-' * 10 ) + 'development'
+  p ('-' * 10) + 'development'
 
   # Settings specified here will take precedence over those in config/application.rb.
 

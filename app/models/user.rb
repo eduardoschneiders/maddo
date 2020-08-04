@@ -10,4 +10,10 @@ class User < ApplicationRecord
   def current_subscription
     subscriptions.order(created_at: :asc).last
   end
+
+  def previous_subscriptions
+    subscriptions.reject do |subscription|
+      subscription == current_subscription
+    end
+  end
 end

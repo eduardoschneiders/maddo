@@ -10,8 +10,10 @@ pt-BR:
       next_billing_at: Próxima cobrança
       canceled_at: Data de cancelamento
       status: Status
+      change: Mudar assinatura
       cancel: Cancelar assinatura
-      sure: Tem certeza que deseja cancelar?
+      sure_change: Tem certeza que deseja mudar?
+      sure_cancel: Tem certeza que deseja cancelar?
       payment_status: Status do pagamento
       plan_data: Dados do plano
       plan_name: Nome do plano

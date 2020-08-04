@@ -29,10 +29,6 @@ class Subscription < ApplicationRecord
     event :cancel, before: :cancel_on_gateway! do
       transitions from: [:initialized, :active, :suspended], to: :canceled
     end
-
-    event :initialize_again do
-      transitions from: [:canceled], to: :initialized
-    end
   end
 
   aasm :payment_status, whiny_transitions: false, collumn: :payment_status do
@@ -78,7 +74,12 @@ class Subscription < ApplicationRecord
 
   def activate_subscription
     update_billing_dates!
+    cancel_previous_subscriptions
     activate!
+  end
+
+  def cancel_previous_subscriptions
+    user.previous_subscriptions.each(&:cancel!)
   end
 
   def cancel_subscription

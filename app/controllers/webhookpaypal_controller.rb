@@ -25,7 +25,7 @@ class WebhookpaypalController < ApplicationController
     end
   end
 
-  def handle_subscription(resource:, event_type:)
+  def handle_subscription(resource:, event_type:) # rubocop:disable Metrics/MethodLength
     subscription = find_subscription!(resource['id'])
 
     case event_type

@@ -23,8 +23,10 @@
       <%= t 'subscriptions_page.labels.status' %>:
       <%= t "subscriptions_page.statuses.#{@current_subscription.status}" %> -
 
+      <%= link_to t('subscriptions_page.labels.change'), build_your_plan_path %>
+
       <%= link_to t('subscriptions_page.labels.cancel'), subscriptions_path, method: :delete, data: {
-          confirm: t('subscriptions_page.labels.sure')
+          confirm: t('subscriptions_page.labels.sure_cancel')
         } %>
         <br />
 

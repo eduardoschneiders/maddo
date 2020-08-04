@@ -34,24 +34,6 @@ RSpec.describe Subscription, type: :model do
     end
   end
 
-  context 'when tries to go to an invalid state' do
-    before do
-      subject.activate!
-    end
-
-    it 'should save the attempts' do
-      expect do
-        subject.initialize_again!
-      end.to change {
-        maps_from_to(subject.reload.status_changes_attempts)
-      }
-        .from([{ from: 'initialized', to: 'activate!' }])
-        .to([{ from: 'initialized', to: 'activate!' }, { from: 'active', to: 'initialize_again!' }])
-
-      expect(maps_from_to(subject.reload.status_changes)).to eql([{ from: 'initialized', to: 'active' }])
-    end
-  end
-
   private
 
   def maps_from_to(map_object)

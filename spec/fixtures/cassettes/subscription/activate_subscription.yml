@@ -78,4 +78,43 @@ http_interactions:
         ID is not valid for this account.  Please resubmit request with the correct
         profile ID.","information_link":"https://developer.paypal.com/docs/api/payments.billing-agreements#errors"}'
   recorded_at: Sun, 26 Jul 2020 16:17:21 GMT
+- request:
+    method: post
+    uri: https://api.sandbox.paypal.com/v1/payments/billing-agreements/I-ID-TO-CANCEL/cancel
+    body:
+      encoding: UTF-8
+      string: Authorization=Basic+QWJRZ29xVlBDTmpYTm9pdE9CU0k1dmZGLWdtN1NKTVlOX1FaRGJwajVab2h2SDFHejJYYzg3NEZYclZGV0hHZWlWQ0RuR1dfUTBzeWdSd1U6RUpOWFM3OHdSRDJSdVZCaVlhUEV5QmlCaFpocWZiTW5vd0hlT0lnS2xOMkNEZ0N4WGM0bU82WXFDaHc3S01XSV9wY1g1VkZXZGhxU0IwaE8%3D&content_type=json
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.5.8p224
+      Content-Length:
+      - '256'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - api.sandbox.paypal.com
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Cache-Control:
+      - max-age=0, no-cache, no-store, must-revalidate
+      Content-Length:
+      - '244'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2020 00:57:10 GMT
+      Paypal-Debug-Id:
+      - 8939f18bcadaa
+    body:
+      encoding: UTF-8
+      string: '{"name":"AUTHENTICATION_FAILURE","message":"Authentication failed due
+        to invalid authentication credentials or a missing Authorization header.","links":[{"href":"https://developer.paypal.com/docs/api/overview/#error","rel":"information_link"}]}'
+  recorded_at: Sun, 26 Jul 2020 00:00:00 GMT
 recorded_with: VCR 6.0.0
